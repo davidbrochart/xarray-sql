@@ -27,7 +27,9 @@ ds = xr.Dataset(
   attrs=dict(description='Random weather.')
 )
 
-df = qr.to_dd(ds, dict(time=48))
+# 24+ chunks creates memory pressure on my 16 GB M1 Mac.
+# time=12 uses about all the memory available on my machine.
+df = qr.to_dd(ds, dict(time=12))
 df.compute()
 print(df.head())
 print(len(df))
